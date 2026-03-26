@@ -1,38 +1,29 @@
-[v] class 키워드를 이용한 Product / ElectronicProduct 클래스 정의
-[v] Product 프로퍼티(name, description, price, tags, images, favoriteCount) 및 favorite() 메소드 구현
-[v] ElectronicProduct가 Product를 상속하며 manufacturer 프로퍼티 추가
-[v] Article 클래스 정의 및 like() 메소드 구현
-[v] Article 클래스에 createdAt(생성일자) 프로퍼티 추가 및 constructor에서 현재 시간 저장
-[v] 각 클래스 마다 constructor 작성
-[v] 추상화/캡슐화/상속/다형성을 고려하여 코드를 작성해 주세요.
+## 구현 내용
 
-Article API 요청 함수 구현 (.then/.catch)
-[v] getArticleList() : GET 메소드 사용 (page, pageSize, keyword 쿼리 파라미터 이용)
-[v] getArticle() : GET 메소드 사용
-[v] createArticle() : POST 메소드 사용 (title, content, image request body 포함)
-[v] patchArticle() : PATCH 메소드 사용
-[v] deleteArticle() : DELETE 메소드 사용
-[v] fetch 혹은 axios 이용
-[v] 응답의 상태 코드가 2XX가 아닐 경우, 에러 메시지를 콘솔에 출력해 주세요.
-[x] .then() 메소드를 이용하여 비동기 처리를 해주세요.
-[v] .catch() 를 이용하여 오류 처리를 해주세요.
-[v] ProductService.js 파일에 Product API 관련 함수들을 작성해 주세요.
+판다마켓 서비스를 AWS 환경에 배포했습니다.
 
-Product API 요청 함수 구현 (async/await)
-[v] getProductList() : GET 메소드 사용 (page, pageSize, keyword 쿼리 파라미터를 이용해 주세요.)
-[v] getProduct() : GET 메소드를 사용해 주세요.
-[x] createProduct() : POST 메소드를 사용해 주세요. (name, description, price, tags, images request body 포함)
-[v] patchProduct() : PATCH 메소드를 사용해 주세요.
-[v] deleteProduct() : DELETE 메소드를 사용해 주세요.
-[v] async/await 을 이용하여 비동기 처리를 해주세요.
-[v] try/catch 를 이용하여 오류 처리를 해주세요.
-[v] getProductList()를 통해서 받아온 상품 리스트를 각각 인스턴스로 만들어 products 배열에 저장해 주세요.
-[v] 해시태그에 "전자제품"이 포함되어 있는 상품들은 ElectronicProduct 클래스를 사용해 인스턴스를 생성해 주세요.
-[x] 나머지 상품들은 모두 Product 클래스를 사용해 인스턴스를 생성해 주세요.
+- AWS S3를 적용하여 업로드 파일을 외부에서 접근 가능하도록 구성했습니다.
+- AWS RDS(PostgreSQL)를 생성하고 Prisma를 통해 연결되도록 설정했습니다.
+- AWS EC2에 Express 서버를 배포했습니다.
+- pm2를 적용해 애플리케이션이 백그라운드에서 계속 실행되도록 설정했습니다.
+- nginx를 리버스 프록시로 설정하여 80번 포트로 서비스되도록 구성했습니다.
 
-파일 구조 및 실행
-[v] ProductService.js 파일 분리 (Product API)
-[v] ArticleService.js 파일 분리 (Article API)
-[x] 이외의 코드들은 모두 main.js 파일에 작성 (import 활용)
-[v] 각 함수를 실행하는 코드를 작성하고, 제대로 동작하는지 확인해 주세요.
-**아직 완전하게 익힌게 아니라 자꾸 오류가 나와서 test.js를 분리했습니다.**
+## 배포 주소
+- http://3.38.251.70
+
+## 첨부 파일
+- `/infra/s3/policy.png`
+- `/infra/rds/secure-group-inbound.png`
+- `/infra/rds/secure-group-outbound.png`
+- `/infra/ec2/secure-group-inbound.png`
+- `/infra/ec2/secure-group-outbound.png`
+- `/infra/ec2/start.sh`
+- `/infra/ec2/ecosystem.config.js`
+- `/infra/ec2/nginx.conf`
+
+
+- 인증 정보 및 민감 정보는 저장소에 포함하지 않았습니다.
+- 운영 환경 변수는 서버 내부에서만 설정했습니다.
+
+## 소감 
+이번 레슨을 통해 단순히 서버를 실행하는 것을 넘어서, 실제 운영 환경에서 파일 저장소(S3), 데이터베이스(RDS), 서버(EC2), 프로세스 관리(pm2), 리버스 프록시(nginx)가 각각 어떤 역할을 하는지 이해할 수 있었습니다. 특히 환경 변수 관리와 보안 그룹 설정이 배포에서 얼마나 중요한지 직접 체감할 수 있었습니다.
